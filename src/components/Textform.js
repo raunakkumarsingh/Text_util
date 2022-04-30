@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import Navbar from './Navbar';
 
 
 export default function Textform(props) {
+  const [Mode,setMode] =useState("lite");
 
      const handleUpClick = ()=>{
       //  console.log("Uppercase was clicked" +text);
@@ -10,6 +12,11 @@ export default function Textform(props) {
      }
      const handleapClick = ()=>{
       //  console.log("Lowercase was clicked" +text);
+      setMode({
+       color: 'white',
+       backgroundColor: 'black'
+ 
+     });
        let newText =text.toLowerCase();
        setText(newText);
      }
@@ -21,6 +28,23 @@ export default function Textform(props) {
       //  let newText=text.toLowerCase();
        setText();
      }
+
+     const toggle=()=>{
+       if(Mode.color ==='white')
+       setMode({
+         color: 'white',
+         backgroundColor: 'black'
+
+       });
+       else{
+          setMode({
+         color: 'white',
+         backgroundColor: 'black'
+
+       });
+       }
+
+     }
      const handleOnChange =(event)=>{
        console.log("on change");
        setText(event.target.value);
@@ -30,22 +54,22 @@ export default function Textform(props) {
 
   return (
     <>
-    <h1>{props.heading}</h1>
-    <div>
- <div className=" mb-3">
+    <h1 style={props.Mode}>{props.heading}</h1>
+    <div style={props.Mode}>
+ <div className=" mb-3"  style={props.Mode}>
  {/* <label for="myBox" className='form-label'>TextTool</label> */}
- <textarea className='form-control' value={text} onChange={handleOnChange} id="myBox" rows="9" >{text}</textarea>
+ <textarea className='form-control' style={props.Mode} value={text} onChange={handleOnChange} id="myBox" rows="9" >{text}</textarea>
 </div>
  <button className="btn btn-primary mx-1"   onClick={handleUpClick}>Convert to upper case</button>
  <button className="btn btn-primary mx-1" onClick={handleapClick}>Convert to lower case</button>
  <button className="btn btn-primary mx-1" onClick={removeCom}> Remove comment</button>
 </div>
 
-<h1>Text Summary </h1>
-<p>{text.split(" ").length} words {text.length} characters</p>
-<p>{0.009 * text.split(" ").length} Minutes read</p>
-<h2>Preview</h2>
-<p>{text}</p>
+<h1 style={props.Mode}>Text Summary </h1>
+<p style={props.Mode}>{text.split(" ").length} words {text.length} characters</p>
+<p style={props.Mode}>{0.009 * text.split(" ").length} Minutes read</p>
+<h2 style={props.Mode} >Preview </h2>
+<p style={props.Mode}>{text}</p>
 
 
 </>
